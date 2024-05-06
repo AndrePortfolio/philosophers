@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:48:20 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/05/06 19:43:45 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/05/06 19:48:20 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void	init_philos(t_simulation *info, t_parameters philo)
 	info->philo = (t_philo *)malloc(sizeof(t_philo) * info->philo_nbr);
 	if (!info->philo)
 		error_message("Failed to allocate memory for philosophers");
-	if (pthread_mutex_init(&info->deadlock, NULL) != 0)
-		error_message("Failed to initialize deadlock mutex");
 	i = 0;
 	while (i < info->philo_nbr)
 	{
@@ -71,7 +69,6 @@ void	init_philos(t_simulation *info, t_parameters philo)
 		else
 			info->philo[i].r_fork = &info->forks[i + 1];
 		pthread_mutex_init(&info->philo[i].eat_count, NULL);
-		info->philo[i].deadlock = info->deadlock;
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:52:36 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/05/06 19:43:29 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/05/06 20:33:06 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	*start_routine(void *pointer)
 	pthread_mutex_lock(&philo->eat_count);
 	while (philo->alive && philo->parms.times_to_eat)
 	{
+		usleep(100);
 		pthread_mutex_unlock(&philo->eat_count);
 		start_eating(philo);
 		if (philo->alive)

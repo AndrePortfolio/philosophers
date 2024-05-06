@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:03:36 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/05/06 19:38:01 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/05/06 20:06:58 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool	wait_turn(t_philo *philo)
 		philo->alive = false;
 		return (false);
 	}
-	usleep(1000);
+	usleep(100);
 	return (true);
 }
 
@@ -67,14 +67,6 @@ void	eat(t_philo *philo)
 	pthread_mutex_lock(&philo->eat_count);
 	philo->parms.times_to_eat--;
 	pthread_mutex_unlock(&philo->eat_count);
-	if (philo->id % 2 == 0)
-	{
-		pthread_mutex_unlock(philo->r_fork);
-		pthread_mutex_unlock(philo->l_fork);
-	}
-	else
-	{
-		pthread_mutex_unlock(philo->l_fork);
-		pthread_mutex_unlock(philo->r_fork);
-	}
+	pthread_mutex_unlock(philo->r_fork);
+	pthread_mutex_unlock(philo->l_fork);
 }
