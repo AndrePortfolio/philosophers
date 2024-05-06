@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:16:51 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/04/25 18:17:01 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/05/06 17:00:17 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@ void	*monitor(void *pointer)
 
 	info = (t_simulation *)pointer;
 	i = 0;
-	while (info->philo->parms.times_to_eat)
+	while (true)
 	{
-		if (info->philo[i++].alive == false)
+		pthread_mutex_lock(&info->philo[i].eat_count);
+		if (info->philo[i].parms.times_to_eat || info->philo[i++].alive == false)
 		{
-			i = 0;
-			while (i < info->philo_nbr)
-				if (pthread_detach(info->philo[i++].thread) != 0)
-					error_message("Failed to detach thread");
-			return (pointer);
+			pthread_mutex_unlock(&info->philo[i].eat_count);
+			break ;
 		}
+		i++;
 		if (i == info->philo_nbr)
 			i = 0;
+		pthread_mutex_unlock(&info->philo[i].eat_count);
 	}
 	return (pointer);
 }

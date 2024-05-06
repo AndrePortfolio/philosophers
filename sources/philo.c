@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 00:23:54 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/04/25 12:42:35 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/05/06 15:29:49 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

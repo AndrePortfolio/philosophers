@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   close_program.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:58:44 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/04/25 16:30:59 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/05/06 16:52:58 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

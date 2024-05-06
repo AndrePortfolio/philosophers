@@ -55,6 +55,7 @@ FIXES:
 - Not accounting for optional argument
 
 RUN TESTER:
+https://github.com/kichkiro/philosophers_tester
 cd tester
 python3 src/__main__.py ..
 ..

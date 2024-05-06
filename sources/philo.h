@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 00:22:37 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/04/25 21:00:44 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/05/06 19:01:09 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,11 @@ typedef struct s_philo
 	pthread_t		thread;
 	bool			alive;
 	int				id;
+	int				philo_nbr;
 	size_t			start_time;
 	size_t			last_meal;
 	t_parameters	parms;
+	pthread_mutex_t	eat_count;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 }					t_philo;

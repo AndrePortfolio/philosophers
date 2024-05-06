@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:03:36 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/04/25 18:18:45 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/05/06 19:00:26 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ void	eat(t_philo *philo)
 {
 	philo->last_meal = get_current_time();
 	usleep(philo->parms.eat_time * 1000);
+	pthread_mutex_lock(&philo->eat_count);
 	philo->parms.times_to_eat--;
+	pthread_mutex_unlock(&philo->eat_count);
 	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
 }

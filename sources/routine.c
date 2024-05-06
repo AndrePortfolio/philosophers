@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:52:36 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/04/25 21:03:27 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/05/06 19:00:30 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,19 @@ void	*start_routine(void *pointer)
 	if (philo->id % 2 == 0)
 		if (!wait_turn(philo))
 			return (pointer);
+	pthread_mutex_lock(&philo->eat_count);
 	while (philo->alive && philo->parms.times_to_eat)
 	{
+		pthread_mutex_unlock(&philo->eat_count);
 		start_eating(philo);
 		if (philo->alive)
 		{
 			start_sleeping(philo);
 			start_thinking(philo);
 		}
+		pthread_mutex_lock(&philo->eat_count);
 	}
+	pthread_mutex_unlock(&philo->eat_count);
 	return (pointer);
 }
 

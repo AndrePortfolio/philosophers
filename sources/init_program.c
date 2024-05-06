@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_program.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:48:20 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/04/25 18:07:33 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/05/06 19:00:39 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	init_philos(t_simulation *info, t_parameters philo)
 		info->philo[i].start_time = get_current_time();
 		info->philo[i].last_meal = info->philo[i].start_time;
 		info->philo[i].parms = philo;
+		info->philo[i].philo_nbr = info->philo_nbr;
 		info->philo[i].l_fork = &info->forks[i];
 		if (info->philo_nbr == 1 && i == 0)
 			info->philo[i].r_fork = NULL;
@@ -68,6 +69,7 @@ void	init_philos(t_simulation *info, t_parameters philo)
 			info->philo[i].r_fork = &info->forks[0];
 		else
 			info->philo[i].r_fork = &info->forks[i + 1];
+		pthread_mutex_init(&info->philo[i].eat_count, NULL);
 		i++;
 	}
 }
