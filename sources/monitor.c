@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:16:51 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/05/09 15:52:12 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/05/09 16:46:28 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	is_satisfied(t_simulation *info)
 	int	i;
 
 	i = 0;
-
 	while (i < info->philo_nbr)
 	{
 		pthread_mutex_lock(&info->philo[i].meals);
@@ -29,7 +28,6 @@ void	is_satisfied(t_simulation *info)
 		pthread_mutex_unlock(&info->philo[i].meals);
 		i++;
 	}
-
 	pthread_mutex_lock(&info->monitor);
 	info->run_sim = false;
 	pthread_mutex_unlock(&info->monitor);
@@ -43,11 +41,10 @@ bool	is_dead(t_simulation *info)
 	while (i < info->philo_nbr)
 	{
 		pthread_mutex_lock(&info->philo[i].starvation);
-		if ((get_current_time() - info->philo[i].last_meal) > info->philo[i].parms.die_time)
+		if ((get_current_time() - info->philo[i].last_meal)
+			> info->philo[i].parms.die_time)
 		{
-			// printf("last meal %d (mon): %zu\n", info->philo[i].id, info->philo[i].last_meal);
 			pthread_mutex_unlock(&info->philo[i].starvation);
-
 			pthread_mutex_lock(&info->monitor);
 			info->run_sim = false;
 			pthread_mutex_unlock(&info->monitor);

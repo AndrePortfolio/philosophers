@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 00:22:37 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/05/09 14:46:56 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/05/09 16:50:46 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int				ft_atoi(char *str);
 void			init_philos(t_simulation *info, t_parameters philo);
 void			init_forks(t_simulation *info);
 void			init_simulation(t_simulation *info);
+void			philo_struct(t_simulation *info, t_parameters philo, int i);
 
 /*---------------------------------Routine-----------------------------------*/
 /*---------------------------------------------------------------------------*/
@@ -91,6 +92,8 @@ size_t			get_current_time(void);
 bool			check_right_fork(t_philo *philo);
 void			eat(t_philo *philo);
 void			ft_sleep(suseconds_t time_to_wait);
+bool			death_check(t_philo *philo);
+bool			death_check_success(t_philo *philo);
 
 /*------------------------------Close Program--------------------------------*/
 /*---------------------------------------------------------------------------*/

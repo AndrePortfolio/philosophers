@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:48:20 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/05/09 14:53:39 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/05/09 16:52:51 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	init_simulation(t_simulation *info)
 	i = 0;
 	while (i < info->philo_nbr)
 		pthread_join(info->philo[i++].thread, NULL);
-		
 	if (pthread_join(info->thread, NULL) != 0)
 		error_message("Failed to join monitor thread");
 }
@@ -47,6 +46,26 @@ void	init_forks(t_simulation *info)
 			error_message("Failed to initialize fork mutex");
 }
 
+void	philo_struct(t_simulation *info, t_parameters philo, int i)
+{
+	info->philo[i].id = i + 1;
+	info->philo[i].run_sim = &info->run_sim;
+	info->philo[i].start_time = get_current_time();
+	info->philo[i].last_meal = info->philo[i].start_time;
+	info->philo[i].parms = philo;
+	info->philo[i].times_eaten = 0;
+	info->philo[i].monitor = &info->monitor;
+	info->philo[i].l_fork = &info->forks[i];
+	if (info->philo_nbr == 1 && i == 0)
+		info->philo[i].r_fork = NULL;
+	else if (i == info->philo_nbr - 1)
+		info->philo[i].r_fork = &info->forks[0];
+	else
+		info->philo[i].r_fork = &info->forks[i + 1];
+	pthread_mutex_init(&info->philo[i].meals, NULL);
+	pthread_mutex_init(&info->philo[i].starvation, NULL);
+}
+
 void	init_philos(t_simulation *info, t_parameters philo)
 {
 	int		i;
@@ -58,23 +77,5 @@ void	init_philos(t_simulation *info, t_parameters philo)
 		error_message("Failed to allocate memory for philosophers");
 	i = 0;
 	while (i < info->philo_nbr)
-	{
-		info->philo[i].id = i + 1;
-		info->philo[i].start_time = get_current_time();
-		info->philo[i].last_meal = info->philo[i].start_time;
-		info->philo[i].parms = philo;
-		info->philo[i].times_eaten = 0;
-		info->philo[i].run_sim = &info->run_sim;
-		info->philo[i].monitor = &info->monitor;
-		info->philo[i].l_fork = &info->forks[i];
-		if (info->philo_nbr == 1 && i == 0)
-			info->philo[i].r_fork = NULL;
-		else if (i == info->philo_nbr - 1)
-			info->philo[i].r_fork = &info->forks[0];
-		else
-			info->philo[i].r_fork = &info->forks[i + 1];
-		pthread_mutex_init(&info->philo[i].meals, NULL);
-		pthread_mutex_init(&info->philo[i].starvation, NULL);
-		i++;
-	}
+		philo_struct(info, philo, i++);
 }

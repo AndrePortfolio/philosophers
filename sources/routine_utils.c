@@ -6,7 +6,7 @@
 /*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:03:36 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/05/09 15:54:34 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/05/09 16:52:18 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	ft_sleep(suseconds_t time_to_wait)
 	start = (suseconds_t)get_current_time();
 	while (true)
 	{
-		if (((suseconds_t)get_current_time() - start) >= (suseconds_t)time_to_wait)
+		if (((suseconds_t)get_current_time() - start)
+			>= (suseconds_t)time_to_wait)
 			return ;
 		usleep (100);
 	}
@@ -54,15 +55,10 @@ void	eat(t_philo *philo)
 	pthread_mutex_lock(&philo->starvation);
 	philo->last_meal = get_current_time();
 	pthread_mutex_unlock(&philo->starvation);
-	
-	// printf("last meal %d (eat): %zu\n", philo->id, philo->last_meal);
-
 	ft_sleep(philo->parms.eat_time);
-
 	pthread_mutex_lock(&philo->meals);
 	philo->times_eaten++;
 	pthread_mutex_unlock(&philo->meals);
-
 	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
 }
