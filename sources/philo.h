@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 00:22:37 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/05/06 19:48:35 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/05/09 14:46:56 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,21 @@ typedef struct s_parameters
 	size_t			die_time;
 	size_t			eat_time;
 	size_t			sleep_time;
-	size_t			times_to_eat;
+	int				times_to_eat;
 }					t_parameters;
 
 typedef struct s_philo
 {
-	pthread_t		thread;
-	bool			alive;
 	int				id;
+	bool			*run_sim;
+	pthread_t		thread;
 	size_t			start_time;
 	size_t			last_meal;
+	int				times_eaten;
 	t_parameters	parms;
-	pthread_mutex_t	eat_count;
+	pthread_mutex_t	meals;
+	pthread_mutex_t	starvation;
+	pthread_mutex_t	*monitor;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 }					t_philo;
@@ -57,7 +60,9 @@ typedef struct s_simulation
 {
 	pthread_t		thread;
 	int				philo_nbr;
+	bool			run_sim;
 	t_philo			*philo;
+	pthread_mutex_t	monitor;
 	pthread_mutex_t	*forks;
 }					t_simulation;
 
@@ -83,10 +88,9 @@ void			start_thinking(t_philo *philo);
 void			*monitor(void *pointer);
 void			print_philo_state(t_philo *philo, char *msg, char *color);
 size_t			get_current_time(void);
-bool			wait_turn(t_philo *philo);
-bool			check_if_dead(t_philo *philo);
 bool			check_right_fork(t_philo *philo);
 void			eat(t_philo *philo);
+void			ft_sleep(suseconds_t time_to_wait);
 
 /*------------------------------Close Program--------------------------------*/
 /*---------------------------------------------------------------------------*/

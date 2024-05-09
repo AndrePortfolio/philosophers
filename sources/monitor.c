@@ -3,34 +3,79 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:16:51 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/05/06 19:59:59 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/05/09 15:52:12 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+void	is_satisfied(t_simulation *info)
+{
+	int	i;
+
+	i = 0;
+
+	while (i < info->philo_nbr)
+	{
+		pthread_mutex_lock(&info->philo[i].meals);
+		if (info->philo->parms.times_to_eat != info->philo->times_eaten)
+		{
+			pthread_mutex_unlock(&info->philo[i].meals);
+			return ;
+		}
+		pthread_mutex_unlock(&info->philo[i].meals);
+		i++;
+	}
+
+	pthread_mutex_lock(&info->monitor);
+	info->run_sim = false;
+	pthread_mutex_unlock(&info->monitor);
+}
+
+bool	is_dead(t_simulation *info)
+{
+	int	i;
+
+	i = 0;
+	while (i < info->philo_nbr)
+	{
+		pthread_mutex_lock(&info->philo[i].starvation);
+		if ((get_current_time() - info->philo[i].last_meal) > info->philo[i].parms.die_time)
+		{
+			// printf("last meal %d (mon): %zu\n", info->philo[i].id, info->philo[i].last_meal);
+			pthread_mutex_unlock(&info->philo[i].starvation);
+
+			pthread_mutex_lock(&info->monitor);
+			info->run_sim = false;
+			pthread_mutex_unlock(&info->monitor);
+			if (info->philo[i].r_fork)
+				print_philo_state(&info->philo[i], "died", ORANGE);
+			return (true);
+		}
+		pthread_mutex_unlock(&info->philo[i].starvation);
+		i++;
+	}
+	return (false);
+}
+
 void	*monitor(void *pointer)
 {
 	t_simulation	*info;
-	int				i;
 
 	info = (t_simulation *)pointer;
-	i = 0;
-	while (true)
+	pthread_mutex_lock(&info->monitor);
+	while (info->run_sim)
 	{
-		pthread_mutex_lock(&info->philo[i].eat_count);
-		if (info->philo[i].parms.times_to_eat || info->philo[i].alive == false)
-		{
-			pthread_mutex_unlock(&info->philo[i].eat_count);
-			break ;
-		}
-		i++;
-		if (i == info->philo_nbr)
-			i = 0;
-		pthread_mutex_unlock(&info->philo[i].eat_count);
+		pthread_mutex_unlock(&info->monitor);
+		if (is_dead(info))
+			return (pointer);
+		if (info->philo->parms.times_to_eat != -1)
+			is_satisfied(info);
+		pthread_mutex_lock(&info->monitor);
 	}
+	pthread_mutex_unlock(&info->monitor);
 	return (pointer);
 }

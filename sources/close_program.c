@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   close_program.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:58:44 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/05/06 16:52:58 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/05/08 23:52:39 by andrealbuqu      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,15 @@ void	free_all(t_simulation *info)
 	if (info->forks)
 	{
 		while (i < info->philo_nbr)
-			pthread_mutex_destroy(&info->forks[i++]);
+		{
+			pthread_mutex_destroy(&info->forks[i]);
+			pthread_mutex_destroy(&info->philo[i].meals);
+			pthread_mutex_destroy(&info->philo[i].starvation);
+			i++;
+		}
 		free(info->forks);
 	}
+	pthread_mutex_destroy(&info->monitor);
 	if (info->philo)
 		free(info->philo);
 }
