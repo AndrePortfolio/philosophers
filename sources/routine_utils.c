@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:03:36 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/05/09 16:52:18 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/05/10 13:29:07 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	ft_sleep(suseconds_t time_to_wait)
 
 bool	check_right_fork(t_philo *philo)
 {
+	print_philo_state(philo, "has taken a fork", RED);
 	if (!philo->r_fork)
 	{
 		ft_sleep(philo->parms.die_time);

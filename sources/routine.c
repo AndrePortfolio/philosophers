@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:52:36 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/05/10 13:09:23 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/05/10 13:31:19 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ bool	death_check_success(t_philo *philo, bool taken, bool even)
 		{
 			if (taken)
 				pthread_mutex_unlock(philo->r_fork);
-			pthread_mutex_unlock(philo->l_fork);			
+			pthread_mutex_unlock(philo->l_fork);
 		}
 		return (true);
 	}
@@ -65,30 +65,29 @@ bool	death_check_success(t_philo *philo, bool taken, bool even)
 
 void	start_eating(t_philo *philo)
 {
-	// if (philo->id % 2 == 0)
-	// {
-	// 	pthread_mutex_lock(philo->r_fork);
-	// 	if (death_check_success(philo, false, true))
-	// 		return ;
-	// 	print_philo_state(philo, "has taken a fork", RED);
-	// 	pthread_mutex_lock(philo->l_fork);
-	// 	if (death_check_success(philo, true, true))
-	// 		return ;
-	// 	print_philo_state(philo, "has taken a fork", RED);
-	// }
-	// else
-	// {
+	if (philo->id % 2 == 0)
+	{
+		pthread_mutex_lock(philo->r_fork);
+		if (death_check_success(philo, false, true))
+			return ;
+		print_philo_state(philo, "has taken a fork", RED);
+		pthread_mutex_lock(philo->l_fork);
+		if (death_check_success(philo, true, true))
+			return ;
+		print_philo_state(philo, "has taken a fork", RED);
+	}
+	else
+	{
 		pthread_mutex_lock(philo->l_fork);
 		if (death_check_success(philo, false, false))
 			return ;
-		print_philo_state(philo, "has taken a fork", RED);
 		if (!check_right_fork(philo))
 			return ;
 		pthread_mutex_lock(philo->r_fork);
 		if (death_check_success(philo, true, false))
 			return ;
 		print_philo_state(philo, "has taken a fork", RED);
-	// }
+	}
 	print_philo_state(philo, "is eating", GREEN);
 	eat(philo);
 }
