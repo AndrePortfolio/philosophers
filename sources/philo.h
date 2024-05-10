@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 00:22:37 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/05/09 16:50:46 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/05/10 13:06:03 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ bool			check_right_fork(t_philo *philo);
 void			eat(t_philo *philo);
 void			ft_sleep(suseconds_t time_to_wait);
 bool			death_check(t_philo *philo);
-bool			death_check_success(t_philo *philo);
+bool			death_check_success(t_philo *philo, bool taken, bool even);
 
 /*------------------------------Close Program--------------------------------*/
 /*---------------------------------------------------------------------------*/
