@@ -38,4 +38,7 @@ fclean: clean
 
 re: fclean all
 
+v: all
+	valgrind --tool=helgrind ./philo 2 900 295 60 10
+
 .PHONY: all clean fclean re

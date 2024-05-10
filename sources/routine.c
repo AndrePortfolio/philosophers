@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:52:36 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/05/10 13:31:19 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/05/10 17:13:31 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	*start_routine(void *pointer)
 		usleep(100);
 	while (true)
 	{
-		if (death_check(philo))
+		if (death_check(philo) 
+			|| philo->times_eaten == philo->parms.times_to_eat)
 			break ;
 		start_eating(philo);
 		start_sleeping(philo);

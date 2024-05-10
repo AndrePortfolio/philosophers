@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:16:51 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/05/09 16:46:28 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/05/10 17:01:09 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	is_satisfied(t_simulation *info)
 	while (i < info->philo_nbr)
 	{
 		pthread_mutex_lock(&info->philo[i].meals);
-		if (info->philo->parms.times_to_eat != info->philo->times_eaten)
+		if (info->philo->parms.times_to_eat != info->philo[i].times_eaten)
 		{
 			pthread_mutex_unlock(&info->philo[i].meals);
 			return ;
@@ -48,6 +48,7 @@ bool	is_dead(t_simulation *info)
 			pthread_mutex_lock(&info->monitor);
 			info->run_sim = false;
 			pthread_mutex_unlock(&info->monitor);
+
 			if (info->philo[i].r_fork)
 				print_philo_state(&info->philo[i], "died", ORANGE);
 			return (true);

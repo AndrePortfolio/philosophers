@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:59:06 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/05/06 14:12:16 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/05/10 16:45:59 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ t_parameters	read_input(int argc, char **argv, t_simulation *info)
 	info->philo_nbr = ft_atoi(argv[1]);
 	if (info->philo_nbr < 1 || info->philo_nbr > 200)
 		error_message("Invalid number of philosophers");
-	if (ft_atoi(argv[2]) > 1)
+	if (ft_atoi(argv[2]) >= 1)
 		philo.die_time = ft_atoi(argv[2]);
 	else
 		error_message("Invalid death timer");
-	if (ft_atoi(argv[3]) > 1)
+	if (ft_atoi(argv[3]) >= 1)
 		philo.eat_time = ft_atoi(argv[3]);
 	else
 		error_message("Invalid eat timer");
-	if (ft_atoi(argv[4]) > 1)
+	if (ft_atoi(argv[4]) >= 1)
 		philo.sleep_time = ft_atoi(argv[4]);
 	else
 		error_message("Invalid sleep timer");
@@ -42,7 +42,7 @@ t_parameters	read_input(int argc, char **argv, t_simulation *info)
 
 void	optional_argument(char *argv, t_parameters *philo)
 {
-	if (ft_atoi(argv) > 1)
+	if (ft_atoi(argv) >= 1)
 		philo->times_to_eat = ft_atoi(argv);
 	else
 		error_message("Invalid number for times to eat");
