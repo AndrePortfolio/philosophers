@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 11:03:36 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/05/17 12:48:20 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/05/17 13:54:35 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,10 @@ void	ft_sleep(suseconds_t time_to_wait, t_philo *philo)
 {
 	suseconds_t	start;
 
+	(void)philo;
 	start = (suseconds_t)get_current_time();
-	while (true)
-	{
-		if (((suseconds_t)get_current_time() - start) 
-			>= (suseconds_t)time_to_wait && death_check(philo))
-			return ;
+	while (((suseconds_t)get_current_time() - start) < (time_to_wait) && !death_check(philo))
 		usleep (100);
-	}
 }
 
 bool	check_right_fork(t_philo *philo)

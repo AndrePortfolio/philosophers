@@ -38,7 +38,4 @@ fclean: clean
 
 re: fclean all
 
-v: all
-	valgrind --tool=helgrind --history-level=none ./philo 2 410 10 10 5
-
 .PHONY: all clean fclean re

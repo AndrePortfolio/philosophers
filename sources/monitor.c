@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:16:51 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/05/17 11:34:06 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/05/17 13:51:19 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ bool	is_dead(t_simulation *info)
 	{
 		pthread_mutex_lock(&info->philo[i].starvation);
 		if ((get_current_time() - info->philo[i].last_meal)
-			> info->philo[i].parms.die_time)
+			> info->philo[i].parms.die_time && (info->philo[i].times_eaten 
+				!= info->philo->parms.times_to_eat))
 		{
 			pthread_mutex_unlock(&info->philo[i].starvation);
 			pthread_mutex_lock(&info->monitor);
