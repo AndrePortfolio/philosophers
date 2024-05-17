@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/15 00:22:37 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/05/17 12:45:06 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/05/17 16:05:48 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_philo
 	pthread_mutex_t	meals;
 	pthread_mutex_t	starvation;
 	pthread_mutex_t	*monitor;
+	pthread_mutex_t	*print;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 }					t_philo;
@@ -63,6 +64,7 @@ typedef struct s_simulation
 	bool			run_sim;
 	t_philo			*philo;
 	pthread_mutex_t	monitor;
+	pthread_mutex_t	print;
 	pthread_mutex_t	*forks;
 }					t_simulation;
 

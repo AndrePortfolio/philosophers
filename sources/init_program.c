@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_program.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:48:20 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/05/09 16:52:51 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/05/17 16:10:08 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	philo_struct(t_simulation *info, t_parameters philo, int i)
 	info->philo[i].parms = philo;
 	info->philo[i].times_eaten = 0;
 	info->philo[i].monitor = &info->monitor;
+	info->philo[i].print = &info->print;
 	info->philo[i].l_fork = &info->forks[i];
 	if (info->philo_nbr == 1 && i == 0)
 		info->philo[i].r_fork = NULL;
@@ -72,6 +73,7 @@ void	init_philos(t_simulation *info, t_parameters philo)
 
 	info->run_sim = true;
 	pthread_mutex_init(&info->monitor, NULL);
+	pthread_mutex_init(&info->print, NULL);
 	info->philo = (t_philo *)malloc(sizeof(t_philo) * info->philo_nbr);
 	if (!info->philo)
 		error_message("Failed to allocate memory for philosophers");

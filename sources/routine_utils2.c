@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine_utils2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrealbuquerque <andrealbuquerque@stud    +#+  +:+       +#+        */
+/*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:51:46 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/05/09 16:54:59 by andrealbuqu      ###   ########.fr       */
+/*   Updated: 2024/05/17 16:07:23 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	print_philo_state(t_philo *philo, char *msg, char *color)
 	size_t	time;
 
 	time = get_current_time() - philo->start_time;
+	pthread_mutex_lock(philo->print);
 	if (time / 100 > 0.5)
 	{
 		if (philo->id / 10 > 0.5)
@@ -54,4 +55,5 @@ void	print_philo_state(t_philo *philo, char *msg, char *color)
 	}
 	else
 		single_digit(philo, msg, color, time);
+	pthread_mutex_unlock(philo->print);
 }
