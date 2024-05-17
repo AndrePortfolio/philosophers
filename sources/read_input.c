@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/16 23:59:06 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/05/10 16:45:59 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/05/17 11:30:02 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ bool	is_white_space(char c, char *spaces)
 
 int	ft_atoi(char *str)
 {
-	int		result;
-	int		sign;
-	int		i;
+	long long	result;
+	int			sign;
+	int			i;
 
 	result = 0;
 	sign = 1;

@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 18:16:51 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/05/10 17:01:09 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/05/17 11:34:06 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ bool	is_dead(t_simulation *info)
 			pthread_mutex_lock(&info->monitor);
 			info->run_sim = false;
 			pthread_mutex_unlock(&info->monitor);
-
 			if (info->philo[i].r_fork)
 				print_philo_state(&info->philo[i], "died", ORANGE);
 			return (true);
