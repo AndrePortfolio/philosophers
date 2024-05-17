@@ -1,12 +1,13 @@
 NAME = philo
-CFLAGS = -Wall -Wextra -Werror -g -pthread #-fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -g -pthread #-pthread
 CC = cc
 COMPRESS = ar rcs
 RM = rm -rf
 
 SRC_DIR = sources
 OBJ_DIR = objects
-SRC = $(wildcard $(SRC_DIR)/*.c)
+SRC = $(addprefix $(SRC_DIR)/,$(addsuffix .c, $(S)))
+S = close_program init_program monitor philo read_input routine_utils routine_utils2 routine
 OBJ = $(addprefix $(OBJ_DIR)/,$(notdir $(SRC:.c=.o)))
 
 # Colours
