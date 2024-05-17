@@ -1,5 +1,5 @@
 NAME = philo
-CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=thread -pthread
+CFLAGS = -Wall -Wextra -Werror -g -pthread #-fsanitize=thread
 CC = cc
 COMPRESS = ar rcs
 RM = rm -rf

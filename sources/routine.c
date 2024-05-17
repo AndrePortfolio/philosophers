@@ -6,7 +6,7 @@
 /*   By: andre-da <andre-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:52:36 by andrealbuqu       #+#    #+#             */
-/*   Updated: 2024/05/10 17:13:31 by andre-da         ###   ########.fr       */
+/*   Updated: 2024/05/17 12:44:53 by andre-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,5 @@ void	start_sleeping(t_philo *philo)
 	if (death_check(philo))
 		return ;
 	print_philo_state(philo, "is sleeping", YELLOW);
-	ft_sleep(philo->parms.sleep_time);
+	ft_sleep(philo->parms.sleep_time, philo);
 }
