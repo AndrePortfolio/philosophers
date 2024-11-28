@@ -74,9 +74,9 @@ Through this project, I gained practical experience with:
 - **Programming Best Practices**: Writing code that adheres to standards, manages resources efficiently, and avoids common pitfalls in C programming.
 
 ## How to Run
-    ```bash
-      git clone https://github.com/AndrePortfolio/philosophers.git
-      cd philosophers
-      make
-      ./philo <nbr-philos> <time-to-die> <time-to-eat> <time-to-sleep> <nbr-meals>
+   ```bash
+   git clone https://github.com/AndrePortfolio/philosophers.git
+   cd philosophers
+   make
+   ./philo <nbr-philos> <time-to-die> <time-to-eat> <time-to-sleep> <nbr-meals>
    ```
