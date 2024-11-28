@@ -16,8 +16,6 @@ The **Philosophers** project is a classic concurrency problem in computer scienc
 
 ## Project Requirements
 
-### Mandatory Part (`philo`)
-
 1. **Arguments**:
    - `number_of_philosophers`: Number of philosophers and forks.
    - `time_to_die`: Time in milliseconds a philosopher can go without eating before dying.
