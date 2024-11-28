@@ -4,6 +4,8 @@
 
 The **Philosophers** project is a classic concurrency problem in computer science designed to teach the basics of multithreading, synchronization, and deadlock prevention. In this project, you will simulate the behavior of philosophers who sit around a table with a bowl of spaghetti and forks. The challenge is to manage concurrent access to shared resources (the forks) in such a way that the philosophers can eat, think, and sleep without starving or causing deadlock.
 
+![image](https://github.com/AndrePortfolio/philosophers/blob/main/philosophers.png)
+
 ## What You Will Learn
 
 - **Multithreading**: Understand how to create and manage threads using the `pthread` library in C.
@@ -22,13 +24,15 @@ The **Philosophers** project is a classic concurrency problem in computer scienc
    - `time_to_eat`: Time in milliseconds a philosopher takes to eat.
    - `time_to_sleep`: Time in milliseconds a philosopher sleeps.
    - `number_of_times_each_philosopher_must_eat` (optional): Simulation stops when all philosophers eat this number of times, or when a philosopher dies if not specified.
-
+   
 2. **Rules**:
    - Each philosopher is a separate thread.
    - Use mutexes to synchronize fork usage to avoid deadlock.
    - Properly handle shared resources to avoid data races.
    - Print state changes as per the specified format (e.g., "timestamp_in_ms X is eating").
    - Ensure that no philosopher dies due to starvation.
+
+![image](https://github.com/AndrePortfolio/philosophers/blob/main/philo.png)
 
 3. **Functions**:
    - Utilize functions such as `pthread_create`, `pthread_detach`, `pthread_join`, `pthread_mutex_init`, `pthread_mutex_lock`, `pthread_mutex_unlock`, `gettimeofday`, and `usleep`.
@@ -70,9 +74,9 @@ Through this project, I gained practical experience with:
 - **Programming Best Practices**: Writing code that adheres to standards, manages resources efficiently, and avoids common pitfalls in C programming.
 
 ## How to Run
-
-1. **Compilation**:
-   Ensure you have a `Makefile` that compiles your program with the required flags (`-Wall -Wextra -Werror`).
-
-   ```bash
+    ```bash
+   git clone https://github.com/AndrePortfolio/philosophers.git
+   cd philosophers
    make
+   ./philo <nbr-philos> <time-to-die> <time-to-eat> <time-to-sleep> <nbr-meals>
+   ```
