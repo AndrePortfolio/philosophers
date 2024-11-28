@@ -75,8 +75,8 @@ Through this project, I gained practical experience with:
 
 ## How to Run
     ```bash
-   git clone https://github.com/AndrePortfolio/philosophers.git
-   cd philosophers
-   make
-   ./philo <nbr-philos> <time-to-die> <time-to-eat> <time-to-sleep> <nbr-meals>
+      git clone https://github.com/AndrePortfolio/philosophers.git
+      cd philosophers
+      make
+      ./philo <nbr-philos> <time-to-die> <time-to-eat> <time-to-sleep> <nbr-meals>
    ```
